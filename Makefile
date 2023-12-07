@@ -4,7 +4,7 @@ HEADER=philo.h
 OBJ=$(SRC:src/%.c=obj/%.o) 
 CC=cc
 LIBFT=libft/libft.a
-CFLAGS=-Wall -Werror -Wextra #-fsanitize=thread -pthread
+CFLAGS=-Wall -Werror -Wextra #-fsanitize=thread -pthread -g
 RM=rm -rf
 
 all: libcomp creat_dir $(NAME) $(OBJ)

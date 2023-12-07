@@ -1,10 +1,18 @@
-1701876296219 0 has taken a fork
-1701876296219 3 is thinking
-1701876296219 0 has taken a fork
-1701876296219 0 is eating
-1701876296219 1 is thinking
-1701876296219 2 has taken a fork
-1701876296219 2 has taken a fork
-1701876296219 2 is eating
-1701876296219 4 has taken a fork
-1701876296419 4 died
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 2 has taken a fork
+0 2 has taken a fork
+0 2 is eating
+0 4 has taken a fork
+200 0 is sleeping
+200 4 has taken a fork
+200 4 is eating
+200 1 has taken a fork
+300 0 is thinking
+500 2 is sleeping
+500 1 has taken a fork
+500 1 is eating
+500 3 has taken a fork
+600 2 is thinking
+600 3 died

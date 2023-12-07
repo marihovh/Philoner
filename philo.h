@@ -6,7 +6,7 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:51:50 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/07 18:00:51 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:31:54 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@
 
 typedef struct	s_philo	t_philo;
 typedef struct	s_data t_data;
-typedef struct	s_help t_help;
-
-struct s_help
-{
-	long			*times;
-	long			start_time;
-	pthread_mutex_t *forks;
-};
-
 
 struct s_philo
 {
@@ -47,19 +38,19 @@ struct s_philo
 
 struct s_data
 {
-	t_help			*help;
 	pthread_t		check;
 	int				philo_count;
 	int				die;
-	// long			*times;
-	// long			start_time;
+	int		*times;
+	// int				to_die;
+	long			start_time;
 	pthread_t		*ids;
 	t_philo			*philos;
 	int				nb;
 	pthread_mutex_t	havai;
 	pthread_mutex_t	havai1;
 	pthread_mutex_t	havai2;
-	// pthread_mutex_t *forks;
+	pthread_mutex_t *forks;
 };
 
 int parcing(int argc, char *argv[]);
@@ -71,5 +62,7 @@ int	ft_usleep(useconds_t time, t_philo *philo);
 int init_threads(t_data *data);
 int i_am_alive(t_philo *philo);
 void philo_print(t_philo *philo, char *action);
+
+int trying(t_philo *philo);/////////////
 
 #endif

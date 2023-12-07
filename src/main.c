@@ -6,7 +6,7 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:56:47 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/06 21:04:22 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:27:38 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
 		printf("argument error\n");
 		return (1);
 	}
-	data->die = 0;
 	if (init(argc, argv, data))
 		return (1);
 	if (pthread_mutex_init(&data->havai, NULL) != 0) {
@@ -38,8 +37,12 @@ int main(int argc, char *argv[])
 		perror("Mutex initialization failed");
 		return (1);
 	}
+	data->die = 0;
 	if (init_struct(data))
 		return (1);
+	// printf("%i\n", data->times[0]);
+	// printf("%i\n", data->times[1]);
+	// printf("%i\n", data->times[2]);
 	if (init_threads(data))
 		return (1);
 	return (0);
