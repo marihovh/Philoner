@@ -1,5 +1,5 @@
 NAME=philo
-SRC = src/main.c src/parcing.c src/init.c src/utils.c
+SRC = src/main.c src/parcing.c src/init.c src/utils.c src/lifelong.c 
 HEADER=philo.h
 OBJ=$(SRC:src/%.c=obj/%.o) 
 CC=cc
