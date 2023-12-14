@@ -6,7 +6,7 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:56:47 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/14 15:55:20 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:35:56 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 int	data_mutex_init(t_data *data)
 {
-	if (pthread_mutex_init(&data->_eat, NULL))
-	{
-		perror("Mutex initialization failed");
-		return (1);
-	}
-	if (pthread_mutex_init(&data->_die, NULL) != 0)
+	if (pthread_mutex_init(&data->_eat, NULL)
+		|| pthread_mutex_init(&data->_die, NULL))
 	{
 		perror("Mutex initialization failed");
 		return (1);

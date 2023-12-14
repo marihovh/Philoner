@@ -6,7 +6,7 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 10:35:58 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/14 16:21:04 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:37:46 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ long	get_time(void)
 	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
-	return ((long long)current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+	return ((long long)current_time.tv_sec * 1000
+		+ current_time.tv_usec / 1000);
 }
 
 int	ft_usleep(useconds_t time, t_philo *philo)
@@ -27,7 +28,8 @@ int	ft_usleep(useconds_t time, t_philo *philo)
 	if (!philo)
 		return (1);
 	start = get_time();
-	while (((get_time() - start) < time) && (trying(philo) != 1) && (philo->data->finished != philo->data->philo_count))
+	while (((get_time() - start) < time) && (trying(philo) != 1)
+		&& (philo->data->finished != philo->data->philo_count))
 		usleep(time / 10);
 	return (0);
 }
