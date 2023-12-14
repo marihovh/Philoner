@@ -6,38 +6,33 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:18:09 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/12 21:18:32 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:25:29 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	try_to_eat(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->forks[philo->l_fork]);
-	philo_print(philo, "has taken a fork");
-	pthread_mutex_lock(&philo->data->forks[philo->r_fork]);
-	philo_print(philo, "has taken a fork");
-	philo_print(philo, "is eating");
-	ft_usleep(philo->data->times[1], philo);
-	pthread_mutex_lock(&philo->data->_eat);
-	philo->last_eat = get_time();
-	pthread_mutex_unlock(&philo->data->_eat);
-	pthread_mutex_unlock(&philo->data->forks[philo->l_fork]);
-	pthread_mutex_unlock(&philo->data->forks[philo->r_fork]);
-}
 
-void	*thread_function(void *philos)
+void *thread_function(void *philos)
 {
-	t_philo	*philo;
+	t_philo *philo;
 
 	philo = (t_philo *)philos;
 	if ((philo->index % 2))
 		ft_usleep((philo->data->times[1] / 2), philo);
-	while (trying(philo) != 1
-		&& (philo->data->finished != philo->data->philo_count))
-	{
-		try_to_eat(philo);
+	while(trying(philo) != 1 && (philo->data->finished != philo->data->philo_count))
+	{	
+		pthread_mutex_lock(&philo->data->forks[philo->l_fork]);
+		philo_print(philo, "has taken a fork");
+		pthread_mutex_lock(&philo->data->forks[philo->r_fork]);
+		philo_print(philo, "has taken a fork");
+		philo_print(philo, "is eating");
+		ft_usleep(philo->data->times[1], philo);
+		pthread_mutex_lock(&philo->data->_eat);
+		philo->last_eat = get_time();
+		pthread_mutex_unlock(&philo->data->_eat);
+		pthread_mutex_unlock(&philo->data->forks[philo->l_fork]);
+		pthread_mutex_unlock(&philo->data->forks[philo->r_fork]);
 		pthread_mutex_lock(&philo->data->_eat);
 		philo->eat_times++;
 		pthread_mutex_unlock(&philo->data->_eat);
@@ -55,6 +50,14 @@ int	init_struct(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * data->philo_count);
 	data->ids = malloc(sizeof(pthread_t) * data->philo_count);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_count);
+	i = -1;
+	while (++i < data->philo_count)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0) {
+        	perror("Mutex initialization failed");
+        	return (1);
+    	}
+	}
 	i = -1;
 	while (++i < data->philo_count)
 	{
@@ -83,14 +86,14 @@ void	create_me(t_data *data)
 		pthread_mutex_lock (&data->_argument);
 		arg = &data->philos[i];
 		pthread_mutex_unlock (&data->_argument);
-		if (!pthread_create(&data->ids[i], NULL, thread_function, (void *)arg))
+		if (pthread_create(&data->ids[i], NULL, thread_function, (void *)arg) != 0)
 			return ;
 	}
 }
 
-int	stimulation(t_data *data)
+int stimulation(t_data *data)
 {
-	int	i;
+	int i = -1;
 
 	i = -1;
 	data->start_time = get_time();

@@ -6,7 +6,7 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:32:52 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/12 21:19:36 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:23:29 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ int	check_len(char **argv, int argc)
 
 int	init(int argc, char *argv[], t_data *data)
 {
-	data->times = malloc(sizeof(int) * (argc - 2));
+	data->times = malloc(sizeof(int) * 3);
 	data->philo_count = ft_atoi(argv[1]);
 	if (data->philo_count > 200)
 	{
 		printf("Wrong count of philos\n");
 		return (1);
 	}
-	if (!check_len(argv, argc))
-	{
-		ft_putstr_fd("one of the arguments is wrong\n", 2);
-		return (1);
-	}
+	// if (!check_len(argv, argc))
+	// {
+	// 	ft_putstr_fd("one of the arguments is wrong\n", 2);
+	// 	return (1);
+	// }
 	data->times[0] = ft_atoi(argv[2]);
 	data->times[1] = ft_atoi(argv[3]);
 	data->times[2] = ft_atoi(argv[4]);
@@ -71,11 +71,9 @@ int	parcing(int argc, char *argv[])
 		j = -1;
 		while (argv[i][++j])
 		{
-			if ((argv[i][j] < '0' || argv[i][j] > '9') && argv[i][j] != '+'
-				&& argv[i][j] != ' ')
+			if ((argv[i][j] < '0' || argv[i][j] > '9') && argv[i][j] != '+' && argv[i][j] != ' ')
 				return (1);
-			if (argv[i][j] == '+'
-				&& ((argv[i][j - 1] && argv[i][j - 1] != ' ') || j != 0))
+			if (argv[i][j] == '+' && ((argv[i][j - 1] && argv[i][j - 1] != ' ') || j != 0))
 				return (1);
 		}
 	}

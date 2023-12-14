@@ -6,7 +6,7 @@
 /*   By: marihovh <marihovh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:51:50 by marihovh          #+#    #+#             */
-/*   Updated: 2023/12/12 21:14:48 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:16:22 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ struct s_philo
 	t_data			*data;
 	int				index;
 	int				eat_times;
-	long			last_eat;
+	int				last_eat;
 	int				status;
 	char			finished;
 	int				l_fork;
